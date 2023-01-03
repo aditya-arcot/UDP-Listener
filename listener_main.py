@@ -12,7 +12,7 @@ while True:
     
     print('\n')
     print(datetime.datetime.now()) 
-    print('data receiveds')
+    print('data received')
 
     try:
         data = data.decode().strip()
