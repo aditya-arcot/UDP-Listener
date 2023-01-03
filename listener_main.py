@@ -28,4 +28,4 @@ while True:
     print(data)
     print('---END---')
 
-    process_data.main() # act on content of message
+    process_data.main(data) # act on content of message
