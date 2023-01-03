@@ -1,39 +1,31 @@
+'''Run continuously and receive UDP data on port 50200'''
+
 import socket
 import datetime
-import subprocess
+import process_data
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(('', 50200))
 
 while True:
-    data = sock.recv(256)
+    data = sock.recv(256) # blocking till data received
+    
+    print('\n')
     print(datetime.datetime.now()) 
-    print('-> data received')
+    print('data receiveds')
 
     try:
         data = data.decode().strip()
-    except:
-        print('-> exception')
+    except: # issue decoding
+        print('error while decoding')
+        print('---DATA---')
         print(data)
-        print()
+        print('---END---')
         continue
-        
+    
+    print('data decoded')
+    print('---DATA---')
     print(data)
+    print('---END---')
 
-    if data == 'wake desktop':
-        process = subprocess.Popen(['wakeonlan', 'A4:BB:6D:54:ED:8C'], 
-                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = process.communicate()
-        
-        print('-> ran command')
-        print('-> stdout:')
-        print(stdout.decode().strip())
-        print()
-        print('-> stderr:')
-        print(stderr.decode().strip())
-        print()
-            
-
-
-    print()
-
+    process_data.main() # act on content of message
