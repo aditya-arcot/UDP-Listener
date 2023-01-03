@@ -1,3 +1,5 @@
+'''Take actions based on content of message'''
+
 import subprocess
 
 def main(data):
